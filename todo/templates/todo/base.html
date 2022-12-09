@@ -1,0 +1,17 @@
+{% if user.is_authenticated %}
+    Вы вошли как {{ user.username }}
+    <a href="{% url 'createtodo' %}">Создать</a>
+    <a href="{% url 'currenttodos' %}">Текущие</a>
+    <a href="{% url 'completedtodos' %}">Выполненные</a>
+
+
+    <form action="{% url 'logoutuser' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+{% else %}
+    <a href="{% url 'signupuser' %}">Зарегистрироваться</a>
+    <a href="{% url 'loginuser' %}">Вход</a><br>
+{% endif %}
+
+{% block content %}{% endblock %}
